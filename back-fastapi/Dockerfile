@@ -1,11 +1,11 @@
 FROM python:3.11.3-alpine
 
-WORKDIR /
+WORKDIR /src
 
 COPY ./requirements.txt /requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r /requirements.txt
 
-COPY ./app /app
+COPY ./ /
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "back_fastapi", "--port", "8000"]

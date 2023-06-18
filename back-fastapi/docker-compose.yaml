@@ -1,0 +1,27 @@
+version: '3.7'
+
+
+services:
+
+  back_fastapi:
+    container_name: back_fastapi
+    ports:
+      - '8000:8000'
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PASS=postgres
+    build: .
+    depends_on: 
+      - db
+      
+  db:
+    container_name: db
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    image: postgres:15.3-alpine
