@@ -34,7 +34,7 @@ async def register(user: UserCreate):
 async def login(form_data: OAuth2PasswordRequestForm = Depends()) -> Token:
     """ Вход с получением токена """
 
-    user = get_user_if_valid(form_data.username, form_data.password)
+    user = await get_user_if_valid(form_data.username, form_data.password)
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
                             detail='Incorect username or password',
