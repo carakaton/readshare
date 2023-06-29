@@ -13,4 +13,4 @@ class User(Base):
     @classmethod
     async def get_by_username(cls, username: str):
         query = select(cls).where(cls.username==username)
-        return await database.execute(query)
+        return await database.fetch_one(query)
