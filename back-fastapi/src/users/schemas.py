@@ -7,6 +7,12 @@ class Token(BaseModel):
     token_type: str
 
 
+class LoginData(BaseModel):
+
+    username: str
+    password: str
+
+
 class UserCreate(BaseModel):
 
     username: str

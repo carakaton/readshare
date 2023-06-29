@@ -5,7 +5,7 @@ from sqlalchemy import insert
 from database import database
 from .models import User
 from .core import get_current_user, create_access_token, encode_password, get_user_if_valid
-from .schemas import Token, UserRead, UserCreate
+from .schemas import Token, UserRead, UserCreate, LoginData
 
 
 router = APIRouter(
@@ -31,10 +31,10 @@ async def register(user: UserCreate):
 
 
 @router.post('/login')
-async def login(username: str, password: str) -> Token:
+async def login(data: LoginData) -> Token:
     """ Вход с получением токена """
 
-    user = await get_user_if_valid(username, password)
+    user = await get_user_if_valid(data.username, data.password)
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
                             detail='Incorect username or password',
