@@ -6,7 +6,7 @@ from asyncpg.exceptions import UniqueViolationError
 
 from database import database
 from .models import Book
-from .schemas import FullBook, FullBooks, FoundBooks
+from .schemas import FullBook, FoundBooks
 from .utils import get_books_basic_info, get_full_book
 
 
@@ -14,26 +14,6 @@ router = APIRouter(
     prefix='/book',
     tags=['Books']
 )
-
-
-@router.get('/all')
-async def get_all_books():
-    """ Получает все книги """
-    
-    query = select(Book)
-    books: list[Book] = await database.fetch_all(query)
-    
-    full_books = [FullBook(
-        id = book.id,
-        title = book.title,
-        author = book.author,
-        cover_url = book.cover_url
-    ) for book in books or []] 
-
-    return FullBooks(
-        count = len(full_books),
-        books = full_books
-    )
 
 
 @router.get('/find/{search_query}')

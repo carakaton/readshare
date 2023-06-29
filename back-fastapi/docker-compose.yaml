@@ -15,8 +15,8 @@ services:
       - DB_PASS=postgres
     build: .
     depends_on: 
-      - db
-      
+      db:
+        condition: service_healthy      
   db:
     container_name: db
     ports:
@@ -25,3 +25,9 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     image: postgres:15.3-alpine
+    healthcheck:
+      test: pg_isready --user $$POSTGRES_USER
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s

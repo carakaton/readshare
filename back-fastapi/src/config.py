@@ -10,5 +10,7 @@ DB_NAME = os.environ.get('DB_NAME')
 DB_USER = os.environ.get('DB_USER')
 DB_PASS = os.environ.get('DB_PASS')
 
+SECRET = os.environ.get('SECRET')
+
 BOOK_FIND_URL = 'https://www.livelib.ru/find/books'
 BOOK_INFO_URL = 'https://www.livelib.ru/book'

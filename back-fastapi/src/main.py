@@ -3,12 +3,16 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 from books.router import router as books_router
-from database import database
+from users.router import router as users_router
+from collection.router import router as collection_router
+from database import database, create_db_and_tables
 
 
 app = FastAPI(title='ReadShare')
 
 app.include_router(books_router)
+app.include_router(users_router)
+app.include_router(collection_router)
 
 origins = [
     'http://localhost:8080',
@@ -26,8 +30,9 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup():
+    await create_db_and_tables()
     await database.connect()
-
+    
 
 @app.on_event("shutdown")
 async def shutdown():
