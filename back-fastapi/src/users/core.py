@@ -7,6 +7,7 @@ from passlib.context import CryptContext
 
 from config import SECRET
 from .models import User
+from .schemas import Token
 
 
 _TOKEN_ENCODE_ALGORITHM = 'HS256'
@@ -18,14 +19,14 @@ _PWD_CONTEXT = CryptContext(schemes=['bcrypt'], deprecated='auto')
 _OAUTH2_SCHEME = OAuth2PasswordBearer(tokenUrl='token')
 
 
-def create_access_token(data: any) -> str:
+def create_access_token(data: any) -> Token:
     """ Создает новый токен """
 
     to_encode = {'sub': data}
     expire = datetime.utcnow() + timedelta(minutes=_TOKEN_EXPIRE_MINUTES)
     to_encode.update({'exp': expire})
     encoded_jwt = jwt.encode(to_encode, SECRET, algorithm=_TOKEN_ENCODE_ALGORITHM)
-    return encoded_jwt
+    return Token(access_token=encoded_jwt, cookie_name='token', expire_time=expire)
     
 
 async def get_user_if_valid(username: str, password: str) -> User:
