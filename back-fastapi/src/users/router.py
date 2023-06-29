@@ -23,7 +23,7 @@ async def register(user: UserCreate):
     
     query = insert(User).values(
         username=user.username,
-        password=encode_password(user.password)
+        hashed_password=encode_password(user.password)
     )
     await database.execute(query)
     
