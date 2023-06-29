@@ -19,7 +19,7 @@ _PWD_CONTEXT = CryptContext(schemes=['bcrypt'], deprecated='auto')
 _OAUTH2_SCHEME = OAuth2PasswordBearer(tokenUrl='token')
 
 
-def create_access_token(data: any) -> Token:
+def create_access_token(data: str) -> Token:
     """ Создает новый токен """
 
     to_encode = {'sub': data}
@@ -58,7 +58,7 @@ async def get_current_user(token: str = Depends(_OAUTH2_SCHEME)):
     if data is None:
         raise credential_exception
     
-    user = await User.get_by_username(data['username'])
+    user = await User.get_by_username(data)
     if user is None:
         raise credential_exception
     

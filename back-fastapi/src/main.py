@@ -24,7 +24,7 @@ app.add_middleware(
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=['GET', 'POST', 'OPTIONS', 'DELETE', 'PATCH', 'PUT'],
-    allow_headers=['Access-Contol-Allow-Headers', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Methods']
+    allow_headers=['Authorization', 'Access-Contol-Allow-Headers', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Methods']
 )
 
 

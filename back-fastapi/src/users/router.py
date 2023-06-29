@@ -39,7 +39,7 @@ async def login(data: LoginData) -> Token:
                             detail='Incorect username or password',
                             headers={'WWW-Authenticate': 'Bearer'})
     
-    return create_access_token(data=user.username) 
+    return create_access_token(data=data.username) 
     
 
 @router.get('/me')
