@@ -91,7 +91,7 @@ async def get_books(user: User = Depends(get_current_user)) -> FullBooks:
     )
 
 
-@router.post('/')
+@router.get('/add_book{book_id}')
 async def add_book(book_id: int, user: User = Depends(get_current_user)):
     """ Добавить книгу текущему пользователю """
 
@@ -102,7 +102,7 @@ async def add_book(book_id: int, user: User = Depends(get_current_user)):
 
 
 
-@router.delete('/')
+@router.get('/delete_book{book_id}')
 async def remove_book(book_id: int, user: User = Depends(get_current_user)):
     """ Все книги текущего пользователя """
     
