@@ -54,7 +54,7 @@ async def add_book(book_id: int, user: User = Depends(get_current_user)):
 async def remove_book(book_id: int, user: User = Depends(get_current_user)):
     """ Все книги текущего пользователя """
     
-    query = delete(BookUser).where(book_id=book_id, user_id=user.id)
+    query = delete(BookUser).where(BookUser.book_id==book_id and BookUser.user_id==user.id)
     await database.execute(query)
     
     return Response(status_code=status.HTTP_200_OK)
