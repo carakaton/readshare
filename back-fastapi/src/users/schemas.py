@@ -1,3 +1,4 @@
+from datetime import datetime
 from pydantic import BaseModel
 
 
@@ -5,7 +6,7 @@ class Token(BaseModel):
 
     access_token: str
     cookie_name: str
-    expire_time: int
+    expire_time: datetime
 
 
 class LoginData(BaseModel):
