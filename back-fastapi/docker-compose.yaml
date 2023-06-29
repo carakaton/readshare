@@ -13,6 +13,7 @@ services:
       - DB_NAME=postgres
       - DB_USER=postgres
       - DB_PASS=postgres
+      - SECRET=ILOVEMIYEON
     build: .
     depends_on: 
       db:
